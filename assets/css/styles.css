@@ -29,6 +29,11 @@ body {
 img {
   display: block;
   max-width: 100%;
+  height: auto;
+}
+
+picture {
+  display: contents;
 }
 
 a {
@@ -133,6 +138,7 @@ textarea {
   border: 1px solid currentColor;
   background: transparent;
   color: inherit;
+  touch-action: manipulation;
 }
 
 .nav-toggle span {
@@ -146,6 +152,7 @@ textarea {
 .hero {
   position: relative;
   min-height: 92vh;
+  min-height: 92svh;
   display: grid;
   align-items: end;
   padding: 128px clamp(18px, 5vw, 72px) 42px;
@@ -254,6 +261,7 @@ p {
   text-transform: uppercase;
   letter-spacing: 0;
   cursor: pointer;
+  touch-action: manipulation;
 }
 
 .button.primary {
@@ -309,6 +317,8 @@ p {
 
 .section-pad {
   padding: clamp(70px, 9vw, 128px) clamp(18px, 5vw, 72px);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
 }
 
 .intro {
@@ -370,12 +380,13 @@ p {
 }
 
 .filter {
-  min-height: 40px;
+  min-height: 44px;
   padding: 0 14px;
   border: 1px solid rgba(255, 255, 255, 0.22);
   color: var(--white);
   background: transparent;
   cursor: pointer;
+  touch-action: manipulation;
 }
 
 .filter.active,

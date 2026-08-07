@@ -17,7 +17,8 @@ resource "random_id" "bucket_suffix" {
 }
 
 resource "aws_s3_bucket" "site" {
-  bucket = "${local.name_prefix}-${random_id.bucket_suffix.hex}"
+  bucket        = "${local.name_prefix}-${random_id.bucket_suffix.hex}"
+  force_destroy = true
 
   tags = local.common_tags
 }

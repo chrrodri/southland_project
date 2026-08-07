@@ -9,6 +9,7 @@
       content="Southland Building and Remodel delivers residential remodeling, additions, interiors, and before-and-after transformations across Los Angeles."
     />
     <meta name="theme-color" content="#12100d" />
+    <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
     <meta property="og:title" content="Southland Building and Remodel" />
     <meta
       property="og:description"
@@ -16,7 +17,7 @@
     />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="assets/img/project-01.jpg" />
-    <link rel="preload" as="image" href="assets/img/project-01.jpg" />
+    <link rel="preload" as="image" href="assets/img/project-01.webp" fetchpriority="high" />
     <link rel="stylesheet" href="assets/css/styles.css" />
   </head>
   <body>
@@ -45,7 +46,17 @@
     <main id="top">
       <section class="hero" aria-label="Featured residential remodel">
         <div class="hero-media" aria-hidden="true">
-          <img src="assets/img/project-01.jpg" alt="" />
+          <picture>
+            <source srcset="assets/img/project-01.webp" type="image/webp" />
+            <img
+              src="assets/img/project-01.jpg"
+              alt=""
+              width="579"
+              height="427"
+              fetchpriority="high"
+              decoding="async"
+            />
+          </picture>
         </div>
         <div class="hero-content">
           <p class="eyebrow">Los Angeles, CA</p>
@@ -132,42 +143,60 @@
 
         <div class="project-grid" data-project-grid>
           <article class="project-card large" data-category="interior" data-title="Bright open-plan remodel" data-image="assets/img/project-01.jpg">
-            <img src="assets/img/project-01.jpg" alt="Finished open-plan residential remodel" />
+            <picture>
+              <source srcset="assets/img/project-01.webp" type="image/webp" />
+              <img src="assets/img/project-01.jpg" alt="Finished open-plan residential remodel" width="579" height="427" loading="lazy" decoding="async" />
+            </picture>
             <div>
               <p>Interior Remodel</p>
               <h3>Bright open-plan remodel</h3>
             </div>
           </article>
           <article class="project-card" data-category="detail" data-title="Custom kitchen finishes" data-image="assets/img/project-02.jpg">
-            <img src="assets/img/project-02.jpg" alt="Kitchen detail with custom finishes" />
+            <picture>
+              <source srcset="assets/img/project-02.webp" type="image/webp" />
+              <img src="assets/img/project-02.jpg" alt="Kitchen detail with custom finishes" width="320" height="434" loading="lazy" decoding="async" />
+            </picture>
             <div>
               <p>Finish Detail</p>
               <h3>Custom kitchen finishes</h3>
             </div>
           </article>
           <article class="project-card" data-category="interior" data-title="Clean bath transformation" data-image="assets/img/project-03.jpg">
-            <img src="assets/img/project-03.jpg" alt="Modern bathroom remodel" />
+            <picture>
+              <source srcset="assets/img/project-03.webp" type="image/webp" />
+              <img src="assets/img/project-03.jpg" alt="Modern bathroom remodel" width="582" height="427" loading="lazy" decoding="async" />
+            </picture>
             <div>
               <p>Bath Remodel</p>
               <h3>Clean bath transformation</h3>
             </div>
           </article>
           <article class="project-card" data-category="exterior" data-title="Curb appeal refresh" data-image="assets/img/project-05.jpg">
-            <img src="assets/img/project-05.jpg" alt="Exterior remodeling project" />
+            <picture>
+              <source srcset="assets/img/project-05.webp" type="image/webp" />
+              <img src="assets/img/project-05.jpg" alt="Exterior remodeling project" width="586" height="427" loading="lazy" decoding="async" />
+            </picture>
             <div>
               <p>Exterior</p>
               <h3>Curb appeal refresh</h3>
             </div>
           </article>
           <article class="project-card wide" data-category="interior" data-title="Warm architectural interior" data-image="assets/img/project-07.jpg">
-            <img src="assets/img/project-07.jpg" alt="Warm architectural residential interior" />
+            <picture>
+              <source srcset="assets/img/project-07.webp" type="image/webp" />
+              <img src="assets/img/project-07.jpg" alt="Warm architectural residential interior" width="1000" height="666" loading="lazy" decoding="async" />
+            </picture>
             <div>
               <p>Whole-home</p>
               <h3>Warm architectural interior</h3>
             </div>
           </article>
           <article class="project-card" data-category="detail" data-title="Entry and finish package" data-image="assets/img/project-09.jpg">
-            <img src="assets/img/project-09.jpg" alt="Entry and interior finish package" />
+            <picture>
+              <source srcset="assets/img/project-09.webp" type="image/webp" />
+              <img src="assets/img/project-09.jpg" alt="Entry and interior finish package" width="480" height="640" loading="lazy" decoding="async" />
+            </picture>
             <div>
               <p>Custom Detail</p>
               <h3>Entry and finish package</h3>
@@ -183,11 +212,17 @@
         </div>
         <div class="compare-grid">
           <figure>
-            <img src="assets/img/project-06.jpg" alt="Completed remodel with clean interior finishes" />
+            <picture>
+              <source srcset="assets/img/project-06.webp" type="image/webp" />
+              <img src="assets/img/project-06.jpg" alt="Completed remodel with clean interior finishes" width="987" height="720" loading="lazy" decoding="async" />
+            </picture>
             <figcaption>After: refined finishes, better light, more usable flow.</figcaption>
           </figure>
           <figure>
-            <img src="assets/img/project-10.jpg" alt="Before and after remodeling reference image" />
+            <picture>
+              <source srcset="assets/img/project-10.webp" type="image/webp" />
+              <img src="assets/img/project-10.jpg" alt="Before and after remodeling reference image" width="574" height="480" loading="lazy" decoding="async" />
+            </picture>
             <figcaption>Before-to-after story: ideal for case studies and client trust.</figcaption>
           </figure>
         </div>
@@ -282,6 +317,6 @@
       </div>
     </div>
 
-    <script src="assets/js/main.js"></script>
+    <script src="assets/js/main.js" defer></script>
   </body>
 </html>
