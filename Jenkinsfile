@@ -1,140 +1,104 @@
 pipeline {
-  agent any
+    agent any
 
-  options {
-    timestamps()
-    disableConcurrentBuilds()
-  }
-
-  parameters {
-    choice(name: 'TF_ACTION', choices: ['apply', 'plan'], description: 'Run terraform plan or apply.')
-    string(name: 'AWS_REGION', defaultValue: 'us-east-1', description: 'AWS region for Terraform and AWS CLI.')
-    booleanParam(name: 'INVALIDATE_CACHE', defaultValue: true, description: 'Invalidate CloudFront after uploading files.')
-  }
-
-  environment {
-    TF_IN_AUTOMATION = 'true'
-    TF_INPUT = 'false'
-    SITE_DIR = '.'
-    TF_DIR = 'terraform'
-  }
-
-  stages {
-    stage('Checkout') {
-      steps {
-        checkout scm
-      }
+    options {
+        timestamps()
+        skipStagesAfterUnstable()
+        disableConcurrentBuilds()
     }
 
-    stage('Validate Site Files') {
-      steps {
-        sh '''
-          test -f index.html
-          test -f assets/css/styles.css
-          test -f assets/js/main.js
-        '''
-      }
+    environment {
+        AWS_IMAGE             = 'amazon/aws-cli:2.31.0'
+        NODE_IMAGE            = 'chrrodri/node-deps:latest'
+
+        APP_NAME              = 'southland-modern-site'
+        APP_VERSION           = "1.0.${env.BUILD_NUMBER}"
+
+        AWS_DEFAULT_REGION    = 'us-east-1'
+        AWS_S3_BUCKET         = "chrrodri-${APP_NAME}"
+
+        // Cambia estos valores por los de la distribucion real del proyecto.
+        AWS_DIST_ID           = 'REPLACE_WITH_CLOUDFRONT_DISTRIBUTION_ID'
+        AWS_CLOUDFRONT_URL    = 'REPLACE_WITH_CLOUDFRONT_DOMAIN'
     }
 
-    stage('Terraform Init') {
-      steps {
-        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-jenkins-credentials']]) {
-          sh '''
-            cd "$TF_DIR"
-            terraform init
-            terraform fmt -check
-            terraform validate
-          '''
+    stages {
+        stage('VALIDATE') {
+            stages {
+                stage('Validate static files') {
+                    agent {
+                        docker {
+                            image "${NODE_IMAGE}"
+                            reuseNode true
+                        }
+                    }
+                    steps {
+                        sh '''
+                            set -e
+
+                            test -f index.html
+                            test -f assets/css/styles.css
+                            test -f assets/js/main.js
+                            test -d assets/img
+
+                            node --check assets/js/main.js
+
+                            echo "Static site files validated for ${APP_NAME} ${APP_VERSION}"
+                        '''
+                    }
+                }
+            }
         }
-      }
-    }
 
-    stage('Terraform Plan') {
-      steps {
-        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-jenkins-credentials']]) {
-          sh '''
-            cd "$TF_DIR"
-            terraform plan \
-              -var="aws_region=${AWS_REGION}" \
-              -out=tfplan
-          '''
+        stage('DEPLOY') {
+            stages {
+                stage('Deploy to S3 and CloudFront') {
+                    agent {
+                        docker {
+                            image "${AWS_IMAGE}"
+                            args '--entrypoint=""'
+                            reuseNode true
+                        }
+                    }
+                    steps {
+                        withCredentials([
+                            string(credentialsId: 'aws-access-key-id', variable: 'AWS_ACCESS_KEY_ID'),
+                            string(credentialsId: 'aws-secret-access-key', variable: 'AWS_SECRET_ACCESS_KEY')
+                        ]) {
+                            sh '''
+                                set -e
+
+                                export AWS_DEFAULT_REGION="${AWS_DEFAULT_REGION}"
+
+                                echo "Publishing ${APP_NAME} ${APP_VERSION} to s3://${AWS_S3_BUCKET}"
+
+                                aws s3 sync assets "s3://${AWS_S3_BUCKET}/assets/" \
+                                    --delete \
+                                    --cache-control "public, max-age=31536000, immutable"
+
+                                aws s3 cp index.html "s3://${AWS_S3_BUCKET}/index.html" \
+                                    --cache-control "no-cache, no-store, must-revalidate" \
+                                    --content-type "text/html"
+
+                                aws cloudfront create-invalidation \
+                                    --distribution-id "${AWS_DIST_ID}" \
+                                    --paths "/*"
+
+                                echo "CloudFront URL: https://${AWS_CLOUDFRONT_URL}"
+                            '''
+                        }
+                    }
+                }
+            }
         }
-      }
     }
 
-    stage('Terraform Apply') {
-      when {
-        expression { params.TF_ACTION == 'apply' }
-      }
-      steps {
-        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-jenkins-credentials']]) {
-          sh '''
-            cd "$TF_DIR"
-            terraform apply -auto-approve tfplan
-          '''
+    post {
+        success {
+            echo "Deploy completed: https://${AWS_CLOUDFRONT_URL}"
         }
-      }
-    }
-
-    stage('Upload Static Site') {
-      when {
-        expression { params.TF_ACTION == 'apply' }
-      }
-      steps {
-        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-jenkins-credentials']]) {
-          sh '''
-            BUCKET_NAME="$(cd "$TF_DIR" && terraform output -raw site_bucket_name)"
-
-            aws s3 sync "$SITE_DIR" "s3://${BUCKET_NAME}/" \
-              --region "$AWS_REGION" \
-              --delete \
-              --exclude ".git/*" \
-              --exclude ".terraform/*" \
-              --exclude "terraform/*" \
-              --exclude "Jenkinsfile" \
-              --exclude "*.zip"
-
-            aws s3 cp index.html "s3://${BUCKET_NAME}/index.html" \
-              --region "$AWS_REGION" \
-              --cache-control "no-cache, no-store, must-revalidate" \
-              --content-type "text/html"
-
-            aws s3 sync assets "s3://${BUCKET_NAME}/assets/" \
-              --region "$AWS_REGION" \
-              --cache-control "public, max-age=31536000, immutable"
-          '''
+        always {
+            cleanWs()
         }
-      }
     }
-
-    stage('Invalidate CloudFront') {
-      when {
-        allOf {
-          expression { params.TF_ACTION == 'apply' }
-          expression { params.INVALIDATE_CACHE }
-        }
-      }
-      steps {
-        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-jenkins-credentials']]) {
-          sh '''
-            DISTRIBUTION_ID="$(cd "$TF_DIR" && terraform output -raw cloudfront_distribution_id)"
-            aws cloudfront create-invalidation \
-              --distribution-id "$DISTRIBUTION_ID" \
-              --paths "/*"
-          '''
-        }
-      }
-    }
-  }
-
-  post {
-    success {
-      sh '''
-        if [ "${TF_ACTION}" = "apply" ]; then
-          cd "$TF_DIR"
-          echo "Site URL: $(terraform output -raw site_url)"
-        fi
-      '''
-    }
-  }
 }
