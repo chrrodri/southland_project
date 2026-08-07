@@ -15,9 +15,10 @@ pipeline {
         APP_VERSION           = "1.0.${env.BUILD_NUMBER}"
 
         AWS_DEFAULT_REGION    = 'us-east-1'
-        AWS_S3_BUCKET         = "chrrodri-${APP_NAME}"
+  
 
         // Cambia estos valores por los de la distribucion real del proyecto.
+        AWS_S3_BUCKET         = "southland-modern-site-prod-f422898d"
         AWS_DIST_ID           = 'E1JZC2YWX8GM0Z'
         AWS_CLOUDFRONT_URL    = 'Rd2ps7ygwur8sb0.cloudfront.net'
     }
