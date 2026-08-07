@@ -8,17 +8,39 @@ Static website refresh for Southland Building and Remodel, based on the public c
 - `assets/css/styles.css` - responsive visual design
 - `assets/js/main.js` - navigation, filters, and project preview modal
 - `assets/img/` - optimized local project images
+- `terraform/` - S3 + CloudFront infrastructure
+- `Jenkinsfile` - Jenkins pipeline for Terraform, S3 upload, and CloudFront invalidation
 
 ## Deploy to S3 + CloudFront
 
-1. Create an S3 bucket for static hosting.
-2. Upload the full contents of this folder, keeping paths intact.
-3. Set CloudFront origin to the S3 bucket.
-4. Set default root object to `index.html`.
-5. Add these cache behaviors:
-   - `index.html`: short TTL, for easy content updates.
-   - `assets/*`: long TTL, because images/CSS/JS are versionable.
-6. Point your domain to the CloudFront distribution with Route 53 or your DNS provider.
+### Terraform
+
+1. Copy `terraform/terraform.tfvars.example` to `terraform/terraform.tfvars`.
+2. Edit the optional domain values if you want a custom domain.
+3. Run:
+
+```bash
+cd terraform
+terraform init
+terraform plan
+terraform apply
+```
+
+### Jenkins
+
+The pipeline expects these tools on the Jenkins agent:
+
+- `terraform`
+- `aws`
+- shell utilities
+
+It also expects an AWS credential in Jenkins with ID:
+
+```text
+aws-jenkins-credentials
+```
+
+The pipeline creates/updates infrastructure, uploads the static files to the private S3 bucket, and invalidates CloudFront.
 
 ## Notes
 

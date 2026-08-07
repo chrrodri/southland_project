@@ -1,0 +1,12 @@
+project_name = "southland-modern-site"
+environment  = "prod"
+aws_region   = "us-east-1"
+
+# Optional custom domain.
+# CloudFront requires the ACM certificate to be created in us-east-1.
+# domain_name         = "www.example.com"
+# acm_certificate_arn = "arn:aws:acm:us-east-1:123456789012:certificate/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+
+# Optional Route 53 record creation.
+# create_dns_record = true
+# hosted_zone_id    = "Z1234567890ABC"
