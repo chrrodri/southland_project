@@ -18,8 +18,8 @@ pipeline {
         AWS_S3_BUCKET         = "chrrodri-${APP_NAME}"
 
         // Cambia estos valores por los de la distribucion real del proyecto.
-        AWS_DIST_ID           = 'REPLACE_WITH_CLOUDFRONT_DISTRIBUTION_ID'
-        AWS_CLOUDFRONT_URL    = 'REPLACE_WITH_CLOUDFRONT_DOMAIN'
+        AWS_DIST_ID           = 'E1JZC2YWX8GM0Z'
+        AWS_CLOUDFRONT_URL    = 'Rd2ps7ygwur8sb0.cloudfront.net'
     }
 
     stages {
