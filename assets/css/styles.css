@@ -545,21 +545,6 @@ figcaption {
   color: rgba(255, 255, 255, 0.62);
 }
 
-.instagram-media {
-  width: 100%;
-  min-width: 0 !important;
-  margin: 0 !important;
-  border-radius: var(--radius) !important;
-  background: rgba(255, 255, 255, 0.08) !important;
-}
-
-.instagram-media a {
-  display: inline-flex;
-  padding: 18px;
-  color: var(--white);
-  font-weight: 800;
-}
-
 .social-preview {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -571,6 +556,66 @@ figcaption {
   width: 100%;
   height: 100%;
   border-radius: var(--radius);
+  object-fit: cover;
+}
+
+.instagram-window {
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.instagram-window-bar {
+  display: flex;
+  gap: 7px;
+  padding: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.instagram-window-bar span {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.42);
+}
+
+.instagram-profile {
+  display: grid;
+  grid-template-columns: 86px 1fr;
+  gap: 14px;
+  align-items: center;
+  padding: 16px;
+}
+
+.instagram-profile img {
+  width: 86px;
+  height: 86px;
+  border-radius: 999px;
+  object-fit: cover;
+}
+
+.instagram-profile strong {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.instagram-profile p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.instagram-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+}
+
+.instagram-mini-grid img {
+  width: 100%;
+  aspect-ratio: 1;
   object-fit: cover;
 }
 

@@ -104,8 +104,4 @@ window.addEventListener("load", () => {
   if (window.lucide) {
     window.lucide.createIcons();
   }
-
-  if (window.instgrm) {
-    window.instgrm.Embeds.process();
-  }
 });
