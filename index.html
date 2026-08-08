@@ -9,7 +9,10 @@
       content="Southland Building and Remodel delivers residential remodeling, additions, interiors, and before-and-after transformations across Los Angeles."
     />
     <meta name="theme-color" content="#12100d" />
+    <meta name="color-scheme" content="light" />
+    <link rel="canonical" href="https://www.southlandbuildingandremodel.com/" />
     <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="manifest.webmanifest" />
     <meta property="og:title" content="Southland Building and Remodel" />
     <meta
       property="og:description"
@@ -17,10 +20,38 @@
     />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="assets/img/project-01.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
     <link rel="preload" as="image" href="assets/img/project-01.webp" fetchpriority="high" />
+    <link rel="preconnect" href="https://www.google.com" />
     <link rel="stylesheet" href="assets/css/styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "GeneralContractor",
+        "name": "Southland Building and Remodel",
+        "telephone": "+1-323-819-0945",
+        "email": "SLBR323@GMAIL.COM",
+        "image": "assets/img/project-01.jpg",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Los Angeles",
+          "addressRegion": "CA",
+          "postalCode": "90222",
+          "addressCountry": "US"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 33.902702,
+          "longitude": -118.248275
+        },
+        "areaServed": "Los Angeles, CA",
+        "sameAs": ["https://www.instagram.com/slbr323/"]
+      }
+    </script>
   </head>
   <body>
+    <a class="skip-link" href="#top">Skip to content</a>
+
     <header class="site-header" data-header>
       <a class="brand" href="#top" aria-label="Southland Building and Remodel home">
         <span class="brand-mark">SB</span>
@@ -30,7 +61,14 @@
         </span>
       </a>
 
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <button
+        class="nav-toggle"
+        type="button"
+        id="nav-toggle"
+        aria-expanded="false"
+        aria-controls="site-nav"
+        aria-label="Toggle navigation menu"
+      >
         <span></span>
         <span></span>
       </button>
@@ -39,6 +77,8 @@
         <a href="#projects">Projects</a>
         <a href="#before-after">Before & After</a>
         <a href="#about">About</a>
+        <a href="#instagram">Instagram</a>
+        <a href="#location">Location</a>
         <a href="#contact">Contact</a>
       </nav>
     </header>
@@ -88,17 +128,17 @@
         </aside>
       </section>
 
-      <section class="intro section-pad">
+      <section class="intro section-pad reveal">
         <div class="section-kicker">Modernized from the original portfolio</div>
         <div class="intro-grid">
           <h2>A sharper showcase for a visual remodeling business.</h2>
           <p>
-            The original site centers on project imagery, before-and-after work, and the company story. This version keeps that visual DNA and adds stronger calls to action, clearer service positioning, faster scanning, and a mobile-first layout ready for static hosting.
+            The original site centers on project imagery, before-and-after work, and the company story. This version keeps that visual DNA and adds stronger calls to action, clearer service positioning, faster scanning, live Instagram and map integration, and a mobile-first layout ready for static hosting.
           </p>
         </div>
       </section>
 
-      <section class="services section-pad" id="services">
+      <section class="services section-pad reveal" id="services">
         <div class="section-heading">
           <p class="section-kicker">What we build</p>
           <h2>Residential remodeling with one accountable team.</h2>
@@ -127,7 +167,7 @@
         </div>
       </section>
 
-      <section class="projects section-pad" id="projects">
+      <section class="projects section-pad reveal" id="projects">
         <div class="section-heading split">
           <div>
             <p class="section-kicker">Selected projects</p>
@@ -205,7 +245,7 @@
         </div>
       </section>
 
-      <section class="before-after section-pad" id="before-after">
+      <section class="before-after section-pad reveal" id="before-after">
         <div class="section-heading">
           <p class="section-kicker">Before & After</p>
           <h2>Show the difference without slowing the page down.</h2>
@@ -228,7 +268,7 @@
         </div>
       </section>
 
-      <section class="process section-pad" id="about">
+      <section class="process section-pad reveal" id="about">
         <div class="section-heading split">
           <div>
             <p class="section-kicker">About the approach</p>
@@ -262,6 +302,89 @@
         </div>
       </section>
 
+      <section class="instagram section-pad reveal" id="instagram" aria-labelledby="instagram-heading">
+        <div class="section-heading split">
+          <div>
+            <p class="section-kicker">Follow the process</p>
+            <h2 id="instagram-heading">Daily work, posted as it happens.</h2>
+          </div>
+          <p>
+            &ldquo;We are a complete design and build firm that covers all areas from conception, plans, permits, construction and design quality finishes.&rdquo; &mdash; from the Southland Building and Remodel Instagram profile.
+          </p>
+        </div>
+
+        <div class="instagram-panel">
+          <div class="instagram-mosaic" role="list">
+            <a role="listitem" class="instagram-tile" href="https://www.instagram.com/slbr323/" target="_blank" rel="noopener noreferrer">
+              <img src="assets/img/project-04.jpg" alt="" width="575" height="360" loading="lazy" decoding="async" />
+              <span class="instagram-tile-icon" aria-hidden="true"></span>
+            </a>
+            <a role="listitem" class="instagram-tile" href="https://www.instagram.com/slbr323/" target="_blank" rel="noopener noreferrer">
+              <img src="assets/img/project-02.jpg" alt="" width="320" height="434" loading="lazy" decoding="async" />
+              <span class="instagram-tile-icon" aria-hidden="true"></span>
+            </a>
+            <a role="listitem" class="instagram-tile" href="https://www.instagram.com/slbr323/" target="_blank" rel="noopener noreferrer">
+              <img src="assets/img/project-09.jpg" alt="" width="480" height="640" loading="lazy" decoding="async" />
+              <span class="instagram-tile-icon" aria-hidden="true"></span>
+            </a>
+            <a role="listitem" class="instagram-tile" href="https://www.instagram.com/slbr323/" target="_blank" rel="noopener noreferrer">
+              <img src="assets/img/project-03.jpg" alt="" width="582" height="427" loading="lazy" decoding="async" />
+              <span class="instagram-tile-icon" aria-hidden="true"></span>
+            </a>
+            <a role="listitem" class="instagram-tile" href="https://www.instagram.com/slbr323/" target="_blank" rel="noopener noreferrer">
+              <img src="assets/img/project-06.jpg" alt="" width="987" height="720" loading="lazy" decoding="async" />
+              <span class="instagram-tile-icon" aria-hidden="true"></span>
+            </a>
+            <a role="listitem" class="instagram-tile" href="https://www.instagram.com/slbr323/" target="_blank" rel="noopener noreferrer">
+              <img src="assets/img/project-05.jpg" alt="" width="586" height="427" loading="lazy" decoding="async" />
+              <span class="instagram-tile-icon" aria-hidden="true"></span>
+            </a>
+          </div>
+
+          <div class="instagram-card">
+            <span class="instagram-glyph" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.6">
+                <rect x="2.5" y="2.5" width="19" height="19" rx="5.5" />
+                <circle cx="12" cy="12" r="4.6" />
+                <circle cx="17.4" cy="6.6" r="1.05" fill="currentColor" stroke="none" />
+              </svg>
+            </span>
+            <p class="instagram-handle">@slbr323</p>
+            <p>Southland Building and Remodel on Instagram &mdash; project photos, finish details, and work in progress from Los Angeles job sites.</p>
+            <a class="button primary" href="https://www.instagram.com/slbr323/" target="_blank" rel="noopener noreferrer">
+              Follow on Instagram
+            </a>
+            <p class="instagram-note">Opens the live profile at instagram.com/slbr323 in a new tab.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="location section-pad reveal" id="location" aria-labelledby="location-heading">
+        <div class="section-heading">
+          <p class="section-kicker">Where we work</p>
+          <h2 id="location-heading">Based in Los Angeles County.</h2>
+        </div>
+        <div class="location-panel">
+          <div class="map-frame">
+            <iframe
+              title="Southland Building and Remodel Company location on Google Maps"
+              src="https://www.google.com/maps?q=Southland+Building+and+Remodel+Company,33.902702,-118.248275&z=14&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+          <div class="location-card">
+            <h3>Southland Building and Remodel</h3>
+            <p>Los Angeles, CA 90222</p>
+            <p>Serving homeowners across the greater Los Angeles area for whole-home remodels, additions, and finish work.</p>
+            <div class="contact-links">
+              <a href="https://maps.app.goo.gl/jj6UDj9szeLvjEQJ9" target="_blank" rel="noopener noreferrer">Get Directions</a>
+              <a href="tel:+13238190945">(323) 819-0945</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="contact section-pad" id="contact">
         <div class="contact-card">
           <div>
@@ -274,7 +397,7 @@
               <span>Los Angeles, CA 90222</span>
             </div>
           </div>
-          <form class="lead-form" action="mailto:SLBR323@GMAIL.COM" method="post" enctype="text/plain">
+          <form class="lead-form" data-lead-form novalidate>
             <label>
               Name
               <input name="name" type="text" autocomplete="name" required />
@@ -298,6 +421,7 @@
               <textarea name="message" rows="4" required></textarea>
             </label>
             <button class="button primary" type="submit">Send Request</button>
+            <p class="form-status" data-form-status role="status" aria-live="polite"></p>
           </form>
         </div>
       </section>
@@ -308,15 +432,16 @@
       <p>Residential remodeling in Los Angeles, CA</p>
     </footer>
 
-    <div class="modal" data-modal hidden>
+    <dialog class="project-modal" data-modal aria-labelledby="modal-title">
       <button class="modal-close" type="button" aria-label="Close project preview" data-close-modal>&times;</button>
       <img src="" alt="" data-modal-image />
       <div>
         <p>Selected Project</p>
-        <h2 data-modal-title></h2>
+        <h2 id="modal-title" data-modal-title></h2>
+        <button class="modal-share" type="button" data-modal-share hidden>Share this project</button>
       </div>
-    </div>
+    </dialog>
 
-    <script src="assets/js/main.js" defer></script>
+    <script src="assets/js/main.js" type="module"></script>
   </body>
 </html>
