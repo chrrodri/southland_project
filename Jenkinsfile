@@ -75,7 +75,15 @@ pipeline {
 
                                 aws s3 sync assets "s3://${AWS_S3_BUCKET}/assets/" \
                                     --delete \
-                                    --cache-control "public, max-age=31536000, immutable"
+                                    --cache-control "public, max-age=300, must-revalidate"
+
+                                aws s3 cp assets/css/styles.css "s3://${AWS_S3_BUCKET}/assets/css/styles.css" \
+                                    --cache-control "public, max-age=300, must-revalidate" \
+                                    --content-type "text/css"
+
+                                aws s3 cp assets/js/main.js "s3://${AWS_S3_BUCKET}/assets/js/main.js" \
+                                    --cache-control "public, max-age=300, must-revalidate" \
+                                    --content-type "text/javascript"
 
                                 aws s3 cp index.html "s3://${AWS_S3_BUCKET}/index.html" \
                                     --cache-control "no-cache, no-store, must-revalidate" \
