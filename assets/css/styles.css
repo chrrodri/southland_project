@@ -776,6 +776,11 @@ figcaption {
   box-shadow: 0 14px 32px rgba(16, 18, 20, 0.22);
 }
 
+.quick-actions a svg {
+  color: var(--white);
+  stroke: currentColor;
+}
+
 .modal {
   position: fixed;
   inset: 0;
